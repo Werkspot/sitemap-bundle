@@ -1,2 +1,2 @@
 # sitemap-bundle
-work in progress
+Simplistic bundle for generating dynamic sitemap.xml content

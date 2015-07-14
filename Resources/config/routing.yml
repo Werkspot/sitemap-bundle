@@ -1,0 +1,14 @@
+werkspot_sitemap_index:
+    path: /sitemap.xml
+    defaults: { _controller: WerkspotSitemapBundle:Generate:index }
+
+werkspot_sitemap_section:
+    path: /sitemap.{section}.xml
+    defaults: { _controller: WerkspotSitemapBundle:Generate:section, page: 1 }
+
+werkspot_sitemap_section_page:
+    path: /sitemap.{section}.{page}.xml
+    defaults: { _controller: WerkspotSitemapBundle:Generate:section }
+    requirements:
+        page: \d+
+

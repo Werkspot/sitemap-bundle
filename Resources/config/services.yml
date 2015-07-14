@@ -1,0 +1,6 @@
+parameters:
+    werkspot.sitemap.default_ttl: 86400
+
+services:
+    werkspot.sitemap.generator:
+        class: Werkspot\Bundle\SitemapBundle\Service\Generator

@@ -1,0 +1,36 @@
+{
+    "name": "werkspot/sitemap-bundle",
+    "description": "Simplistic bundle for generating dynamic sitemap.xml content",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "keywords": [
+        "seo",
+        "sitemap",
+        "symfony",
+        "bundle"
+    ],
+    "autoload": {
+        "psr-4": { "Werkspot\\Bundle\\SitemapBundle\\": "" }
+    },
+    "authors": [
+        {
+            "name": "Thanos Polymeneas",
+            "email": "zinbiel@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/routing": "^2.7",
+        "symfony/http-kernel": "^2.7",
+        "symfony/framework-bundle": "^2.7",
+        "symfony/finder": "^2.7",
+        "symfony/browser-kit": "^2.7",
+        "symfony/twig-bridge": "^2.7"
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.4"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

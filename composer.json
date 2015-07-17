@@ -26,8 +26,7 @@
         "symfony/finder": "^2.7",
         "symfony/browser-kit": "^2.7",
         "symfony/twig-bridge": "^2.7",
-        "symfony/twig-bundle": "^2.7",
-        "phpunit/phpunit": "^4.7"
+        "symfony/twig-bundle": "^2.7"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4"

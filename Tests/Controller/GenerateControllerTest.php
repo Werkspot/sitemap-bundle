@@ -43,6 +43,7 @@ class GenerateControllerTest extends WebTestCase
         $client->request('GET', $url);
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        $this->assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 
@@ -85,6 +86,7 @@ class GenerateControllerTest extends WebTestCase
         $client->request('GET', $url);
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        $this->assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 

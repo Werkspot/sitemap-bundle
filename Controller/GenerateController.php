@@ -43,7 +43,10 @@ class GenerateController extends Controller
      */
     private function getEmptyXmlResponse()
     {
-        $response = new Response(null, Response::HTTP_OK, ['Content-type' => 'text/xml']);
+        $response = new Response(null, Response::HTTP_OK, [
+            'Content-type' => 'text/xml',
+            'X-Robots-Tag' => 'noindex'
+        ]);
         $ttl = $this->get('service_container')->getParameter('werkspot.sitemap.default_ttl');
         $response->setTtl($ttl);
         return $response;

@@ -1,6 +1,6 @@
 {
     "name": "werkspot/sitemap-bundle",
-    "description": "Simplistic bundle for generating dynamic sitemap.xml content",
+    "description": "Bundle for generating dynamic sitemap.xml content with support for multiple sections",
     "type": "symfony-bundle",
     "license": "MIT",
     "keywords": [

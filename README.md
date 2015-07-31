@@ -1,5 +1,5 @@
-# sitemap-bundle
-Bundle for generating dynamic sitemap.xml content with support for multiple pages per item.
+# Werkspot sitemap bundle
+Bundle for generating dynamic sitemap.xml content with support for multiple sections and pages per section.
 
 [![Travis build status](https://travis-ci.org/Werkspot/sitemap-bundle.svg?branch=master)](https://travis-ci.org/Werkspot/sitemap-bundle)
 

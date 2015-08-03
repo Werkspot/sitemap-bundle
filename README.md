@@ -6,6 +6,8 @@ Bundle for generating dynamic sitemap.xml content with support for multiple sect
 
 ### Install
 
+`# composer require werkspot/sitemap-bundle`
+
 #### Update your routing
 
 ```yaml

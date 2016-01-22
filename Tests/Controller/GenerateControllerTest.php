@@ -92,6 +92,7 @@ class GenerateControllerTest extends WebTestCase
 
         $this->assertEquals($mockUrlCount, count($xml->url));
         $this->assertGreaterThan(0, $client->getResponse()->getTtl());
+        $this->assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }
 
     public function testSectionActionOutOfRange()

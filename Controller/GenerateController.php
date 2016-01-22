@@ -2,17 +2,20 @@
 namespace Werkspot\Bundle\SitemapBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Werkspot\Bundle\SitemapBundle\Service\Generator;
 
 class GenerateController extends Controller
 {
     /**
      * Shows the sitemap index with links to deeper sitemap sections
+     *
      * @return Response
      */
     public function indexAction()
     {
-        $index = $this->get('werkspot.sitemap.generator')->generateIndex();
+        $index = $this->getSitemapGenerator()->generateIndex();
 
         return $this->render('WerkspotSitemapBundle::index.xml.twig', [
             'sitemap_index' => $index
@@ -23,11 +26,12 @@ class GenerateController extends Controller
      * Renders a single sitemap section
      * @param string $section
      * @param int $page
+     *
      * @return Response
      */
     public function sectionAction($section, $page)
     {
-        $sitemapSectionPage = $this->get('werkspot.sitemap.generator')->generateSectionPage($section, $page);
+        $sitemapSectionPage = $this->getSitemapGenerator()->generateSectionPage($section, $page);
 
         if ($sitemapSectionPage->getCount() === 0) {
             throw $this->createNotFoundException('Requested page is out of range');
@@ -47,8 +51,25 @@ class GenerateController extends Controller
             'Content-type' => 'text/xml',
             'X-Robots-Tag' => 'noindex'
         ]);
-        $ttl = $this->get('service_container')->getParameter('werkspot.sitemap.default_ttl');
-        $response->setTtl($ttl);
+        $sharedMaxAge = $this->getServiceContainer()->getParameter('werkspot.sitemap.cache.shared_max_age');
+        $response->setSharedMaxAge($sharedMaxAge);
+
         return $response;
+    }
+
+    /**
+     * @return Generator
+     */
+    private function getSitemapGenerator()
+    {
+        return $this->get('werkspot.sitemap.generator');
+    }
+
+    /**
+     * @return ContainerInterface
+     */
+    private function getServiceContainer()
+    {
+        return $this->get('service_container');
     }
 }

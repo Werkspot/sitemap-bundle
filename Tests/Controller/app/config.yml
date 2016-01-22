@@ -4,4 +4,4 @@ framework:
     templating:
         engines: ['twig']
     test: ~
-
+    assets: ~

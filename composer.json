@@ -20,16 +20,17 @@
     ],
     "require": {
         "php": ">=5.4",
-        "symfony/routing": "*",
-        "symfony/http-kernel": "*",
-        "symfony/framework-bundle": "*",
-        "symfony/finder": "*",
-        "symfony/browser-kit": "*",
-        "symfony/twig-bridge": "*",
-        "symfony/twig-bundle": "*"
+        "symfony/routing": "~2.3|~3.0",
+        "symfony/http-kernel": "~2.3|~3.0",
+        "symfony/framework-bundle": "~2.3|~3.0",
+        "symfony/finder": "~2.3|~3.0",
+        "symfony/browser-kit": "~2.3|~3.0",
+        "symfony/twig-bridge": "~2.3|~3.0",
+        "symfony/twig-bundle": "~2.3|~3.0"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.4"
+        "mockery/mockery": "*",
+        "phpunit/phpunit": "*"
     },
     "config": {
         "bin-dir": "bin"

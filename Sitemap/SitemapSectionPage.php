@@ -4,10 +4,11 @@ namespace Werkspot\Bundle\SitemapBundle\Sitemap;
 class SitemapSectionPage
 {
     /**
-     * Official max is 50000
-     * We can keep it slightly lower to make sure we don't hit reach the 50MB limit instead
+     * Official max is 50000.
+     * We keep the limit on 10000 to avoid having too big files that take too long to load
+     * and make sure we don't hit reach the 50MB limit.
      */
-    const MAX_ITEMS_PER_PAGE = 25000;
+    const MAX_ITEMS_PER_PAGE = 10000;
 
     /**
      * @var Url[]

@@ -3,7 +3,7 @@
     {% for section in sitemap_index.sections %}
         {% for page in 1..section.pageCount %}
             <sitemap>
-                <loc>{{ url('werkspot_sitemap_section_page', {section: section.name, page: page})|replace({'http:': 'https:'}) }}</loc>
+                <loc>{{ url('werkspot_sitemap_section_page', {section: section.name, page: page}) }}</loc>
             </sitemap>
         {% endfor %}
     {% endfor %}

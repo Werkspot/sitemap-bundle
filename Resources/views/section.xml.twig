@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {% for url in sitemap_section.urls %}
         <url>
-            <loc>{{ url.loc|replace({'http:': 'https:'}) }}</loc>
+            <loc>{{ url.loc }}</loc>
             <changefreq>{{ url.changefreq }}</changefreq>
             {% if url.priority %}<priority>{{ url.priority }}</priority>{% endif %}
         </url>

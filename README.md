@@ -85,7 +85,7 @@ The following will generate `/sitemap.products.xml` and if the count is too high
 ```php
 namespace AppBundle\Sitemap;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Werkspot\Bundle\SitemapBundle\Provider\AbstractSitemapProvider;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
 use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
@@ -100,12 +100,12 @@ class ProductSitemapProvider extends AbstractSitemapProvider
     private $productRepository;
 
     /**
-     * @param RouterInterface $router
+     * @param UrlGeneratorInterface $urlGenerator
      * @param ProductRepository $productRepository
      */
-    public function __construct(RouterInterface $router, ProductRepository $productRepository)
+    public function __construct(UrlGeneratorInterface $urlGenerator, ProductRepository $productRepository)
     {
-        parent::__construct($router);
+        parent::__construct($urlGenerator);
         $this->productRepository = $productRepository;
     }
 

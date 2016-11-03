@@ -1,23 +1,23 @@
 <?php
 namespace Werkspot\Bundle\SitemapBundle\Provider;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
 
 abstract class AbstractSitemapProvider implements ProviderInterface
 {
     /**
-     * @var RouterInterface
+     * @var UrlGeneratorInterface
      */
-    protected $router;
+    protected $urlGenerator;
 
     /**
-     * @param RouterInterface $router
+     * @param UrlGeneratorInterface $urlGenerator
      */
-    public function __construct(RouterInterface $router)
+    public function __construct(UrlGeneratorInterface $urlGenerator)
     {
-        $this->router = $router;
+        $this->urlGenerator = $urlGenerator;
     }
 
     /**
@@ -43,7 +43,7 @@ abstract class AbstractSitemapProvider implements ProviderInterface
      */
     final protected function generateUrl($routeName, $options = [])
     {
-        return $this->router->generate($routeName, $options, RouterInterface::ABSOLUTE_URL);
+        return $this->urlGenerator->generate($routeName, $options, UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     /**

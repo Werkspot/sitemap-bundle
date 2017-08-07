@@ -38,6 +38,11 @@ class Url
     protected $priority;
 
     /**
+     * @var AlternateLink[]
+     */
+    protected $alternateLinks;
+
+    /**
      * Construct a new basic url
      *
      * @param string $loc - absolute url
@@ -143,5 +148,21 @@ class Url
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    /**
+     * @param AlternateLink $alternateLink
+     */
+    public function addAlternateLink(AlternateLink $alternateLink)
+    {
+        $this->alternateLinks[] = $alternateLink;
+    }
+
+    /**
+     * @return AlternateLink[]
+     */
+    public function getAlternateLinks()
+    {
+        return $this->alternateLinks;
     }
 }

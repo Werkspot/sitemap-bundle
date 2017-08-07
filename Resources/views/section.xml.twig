@@ -1,10 +1,14 @@
 {% spaceless %}<?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
     {% for url in sitemap_section.urls %}
         <url>
             <loc>{{ url.loc }}</loc>
             <changefreq>{{ url.changefreq }}</changefreq>
             {% if url.priority %}<priority>{{ url.priority }}</priority>{% endif %}
+            {% for alternateLink in url.alternateLinks %}
+                <xhtml:link rel="alternate" hreflang="{{ alternateLink.hreflang }}" href="{{ alternateLink.href }}" />
+            {% endfor %}
         </url>
     {% endfor %}
 </urlset>{% endspaceless %}

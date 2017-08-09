@@ -146,3 +146,39 @@ class ProductSitemapProvider extends AbstractSitemapProvider
         return $this->productRepository->getTotalCount();
     }
 }
+```
+
+### Adding alternate language pages
+
+To add links to translations for pages to the sitemap, you can use `AlternateLink` and add these to a Url.
+
+Google Guidelines: https://support.google.com/webmasters/answer/2620865?hl=en
+
+*Note: The alternate links should include the Url itself, see the second note in the link above*
+
+#### Example
+
+```php
+    /**
+     * @return SitemapSectionPage
+     */
+    public function getSinglePage()
+    {
+        $page = new SitemapSectionPage();
+
+        $urlRoute = $this->generateUrl('home');
+        $urlRouteDe = $this->generateUrl('home', ['_locale' => 'de']);
+        $urlRouteFr = $this->generateUrl('home', ['_locale' => 'fr']);
+        
+        $sitemapUrl = new Url($urlRoute, Url::CHANGEFREQ_WEEKLY, 1.0);
+        $sitemapUrl->addAlternateLink(new AlternateLink($urlRouteDe, 'de'));
+        $sitemapUrl->addAlternateLink(new AlternateLink($urlRouteFr, 'fr'));
+        $sitemapUrl->addAlternateLink(new AlternateLink($urlRoute, 'x-default')); // Country select page
+        // Or
+        $sitemapUrl->addAlternateLink(new AlternateLink($urlRoute, 'en')); 
+        
+        $page->addUrl($sitemapUrl);
+
+        return $page;
+    }
+```

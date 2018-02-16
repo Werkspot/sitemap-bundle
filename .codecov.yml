@@ -1,0 +1,7 @@
+codecov:
+    bot: Covecov bot
+    notify:
+        require_ci_to_pass: false
+        after_n_builds: 1
+
+comment: false

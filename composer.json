@@ -33,6 +33,6 @@
         "symfony/twig-bundle": "~2.3|~3.0"
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "vendor/bin"
     }
 }

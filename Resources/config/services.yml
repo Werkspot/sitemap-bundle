@@ -4,3 +4,4 @@ parameters:
 services:
     werkspot.sitemap.generator:
         class: Werkspot\Bundle\SitemapBundle\Service\Generator
+        public: true

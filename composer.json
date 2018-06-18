@@ -10,7 +10,8 @@
         "bundle"
     ],
     "autoload": {
-        "psr-4": { "Werkspot\\Bundle\\SitemapBundle\\": "" }
+        "psr-4": { "Werkspot\\Bundle\\SitemapBundle\\": "" },
+        "classmap": ["Tests/Controller/app/AppKernel.php"]
     },
     "authors": [
         {
@@ -19,8 +20,8 @@
         }
     ],
     "require": {
-        "php": ">=5.5",
-        "symfony/framework-bundle": "~2.3|~3.0"
+        "php": "^7.1",
+        "symfony/framework-bundle": "^3.1|^4.0"
     },
     "require-dev": {
         "mockery/mockery": "~0.9|^1.0@dev",
@@ -30,7 +31,8 @@
         "symfony/templating": "~2.3|~3.0",
         "symfony/browser-kit": "~2.3|~3.0",
         "symfony/twig-bridge": "~2.3|~3.0",
-        "symfony/twig-bundle": "~2.3|~3.0"
+        "symfony/twig-bundle": "~2.3|~3.0",
+        "symfony/phpunit-bridge": "^4.1"
     },
     "config": {
         "bin-dir": "vendor/bin"

@@ -11,6 +11,10 @@
     ],
     "autoload": {
         "psr-4": { "Werkspot\\Bundle\\SitemapBundle\\": "" },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "autoload-dev": {
+        "psr-4": { "Werkspot\\Bundle\\SitemapBundle\\Tests\\": "Tests" },
         "classmap": ["Tests/Controller/app/AppKernel.php"]
     },
     "authors": [

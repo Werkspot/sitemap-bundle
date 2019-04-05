@@ -8,6 +8,7 @@
         >
     <php>
         <ini name="error_reporting" value="-1" />
+        <env name="KERNEL_DIR" value="Tests/Controller/app/" />
         <env name="KERNEL_CLASS" value="AppKernel" />
     </php>
 

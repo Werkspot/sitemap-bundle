@@ -4,12 +4,12 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="vendor/autoload.php"
-        >
+         bootstrap="./Tests/Controller/app/autoload.php"
+>
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_DIR" value="Tests/Controller/app/" />
-        <env name="KERNEL_CLASS" value="AppKernel" />
+        <server name="KERNEL_DIR" value="Tests/Controller/app/" />
+        <server name="KERNEL_CLASS" value="AppKernel" />
     </php>
 
     <testsuites>

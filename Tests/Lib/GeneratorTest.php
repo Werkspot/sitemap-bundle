@@ -1,10 +1,10 @@
 <?php
-namespace Werkspot\Bundle\SitemapBundle\Tests\Service;
+namespace Werkspot\Bundle\SitemapBundle\Tests\Lib;
 
 use Mockery;
-use Werkspot\Bundle\SitemapBundle\Provider\ProviderInterface;
-use Werkspot\Bundle\SitemapBundle\Service\Generator;
-use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
+use Werkspot\Bundle\SitemapBundle\Lib\Provider\ProviderInterface;
+use Werkspot\Bundle\SitemapBundle\Lib\Generator;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\SitemapSection;
 
 class GeneratorTest extends \PHPUnit_Framework_TestCase
 {

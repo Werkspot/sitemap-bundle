@@ -1,0 +1,2 @@
+parameters:
+    werkspot.sitemap.cache.shared_max_age: 86400 # One day

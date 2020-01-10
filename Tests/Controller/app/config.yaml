@@ -1,0 +1,7 @@
+framework:
+    secret:        test
+    router:        { resource: "%kernel.root_dir%/../../../Resources/config/routing.yaml" }
+    templating:
+        engines: ['twig']
+    test: ~
+    assets: ~

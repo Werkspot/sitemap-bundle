@@ -1,22 +1,27 @@
 <?php
-namespace Werkspot\Bundle\SitemapBundle\Service;
+
+declare(strict_types=1);
+
+namespace Werkspot\Bundle\SitemapBundle\Lib;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Werkspot\Bundle\SitemapBundle\Provider\ProviderInterface;
-use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapIndex;
-use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
+use Werkspot\Bundle\SitemapBundle\Lib\Provider\ProviderInterface;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\SitemapIndex;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\SitemapSectionPage;
 
-class Generator
+final class Generator implements GeneratorInterface
 {
     /**
      * @var ProviderInterface[]
      */
     private $providers = [];
 
-    /**
-     * @return SitemapIndex
-     */
-    public function generateIndex()
+    public function __construct(ProviderInterface ...$providers)
+    {
+        $this->providers = $providers;
+    }
+
+    public function generateIndex(): SitemapIndex
     {
         $index = new SitemapIndex();
 
@@ -31,12 +36,7 @@ class Generator
         return $index;
     }
 
-    /**
-     * @param string $sectionName
-     * @param int $page
-     * @return SitemapSectionPage
-     */
-    public function generateSectionPage($sectionName, $page)
+    public function generateSectionPage(string $sectionName, int $page): SitemapSectionPage
     {
         $provider = $this->getProvider($sectionName);
 
@@ -47,19 +47,7 @@ class Generator
         return $provider->getPage($page);
     }
 
-    /**
-     * @param ProviderInterface $provider
-     */
-    public function addProvider(ProviderInterface $provider)
-    {
-        $this->providers[$provider->getSectionName()] = $provider;
-    }
-
-    /**
-     * @param string $sectionName
-     * @return null|ProviderInterface
-     */
-    private function getProvider($sectionName)
+    private function getProvider(string $sectionName): ?ProviderInterface
     {
         return isset($this->providers[$sectionName]) ? $this->providers[$sectionName] : null;
     }

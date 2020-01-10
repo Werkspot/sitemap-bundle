@@ -6,12 +6,12 @@ use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Werkspot\Bundle\SitemapBundle\Service\Generator;
-use Werkspot\Bundle\SitemapBundle\Sitemap\AlternateLink;
-use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapIndex;
-use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
-use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
-use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
+use Werkspot\Bundle\SitemapBundle\Lib\Generator;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\AlternateLink;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\SitemapIndex;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\SitemapSection;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\SitemapSectionPage;
+use Werkspot\Bundle\SitemapBundle\Lib\Sitemap\Url;
 
 class GenerateControllerTest extends WebTestCase
 {

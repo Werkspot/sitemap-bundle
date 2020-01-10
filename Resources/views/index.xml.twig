@@ -1,11 +1,11 @@
 {% spaceless %}<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    {% for section in sitemap_index.sections %}
-        {% for page in 1..section.pageCount %}
-            <sitemap>
-                <loc>{{ url('werkspot_sitemap_section_page', {section: section.name, page: page}) }}</loc>
-            </sitemap>
-        {% endfor %}
-    {% endfor %}
+<sitemapindex xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+{% for section in sitemap_index.sections %}
+{% for page in 1..section.pageCount %}
+    <sitemap>
+        <loc>{{ url('werkspot_sitemap_section_page', {section: section.name, page: page}) }}</loc>
+    </sitemap>
+{% endfor %}
+{% endfor %}
 </sitemapindex>
 {% endspaceless %}

@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        public: true
+
+    Werkspot\Bundle\SitemapBundle\Controller\GenerateController:
+        arguments:
+            $generator: '@Werkspot\Bundle\SitemapBundle\Lib\GeneratorInterface'
+            $templateEngine: '@twig'
+            $sharedMaxAge: '%werkspot.sitemap.cache.shared_max_age%'
+        tags: ['controller.service_arguments']
+
+    Werkspot\Bundle\SitemapBundle\Lib\Generator:
+        arguments: [!tagged werkspot.sitemap_provider]
+
+    Werkspot\Bundle\SitemapBundle\Lib\GeneratorInterface: '@Werkspot\Bundle\SitemapBundle\Lib\Generator'

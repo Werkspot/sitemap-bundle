@@ -1,75 +1,72 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Werkspot\Bundle\SitemapBundle\Service\Generator;
+use Twig\Environment;
+use Werkspot\Bundle\SitemapBundle\Lib\Generator;
 
-class GenerateController extends Controller
+final class GenerateController
 {
     /**
-     * Shows the sitemap index with links to deeper sitemap sections
-     *
-     * @return Response
+     * @var Generator
      */
-    public function indexAction()
-    {
-        $index = $this->getSitemapGenerator()->generateIndex();
+    private $generator;
 
-        return $this->render('WerkspotSitemapBundle::index.xml.twig', [
-            'sitemap_index' => $index
-        ], $this->getEmptyXmlResponse());
+    /**
+     * @var Environment
+     */
+    private $templateEngine;
+
+    /**
+     * @var int
+     */
+    private $sharedMaxAge;
+
+    public function __construct(Generator $generator, Environment $templateEngine, int $sharedMaxAge)
+    {
+        $this->generator = $generator;
+        $this->templateEngine = $templateEngine;
+        $this->sharedMaxAge = $sharedMaxAge;
+    }
+
+    /**
+     * Shows the sitemap index with links to deeper sitemap sections
+     */
+    public function indexAction(): Response
+    {
+        $index = $this->generator->generateIndex();
+
+        return $this->render('@index.xml.twig', ['sitemap_index' => $index]);
     }
 
     /**
      * Renders a single sitemap section
-     * @param string $section
-     * @param int $page
-     *
-     * @return Response
      */
-    public function sectionAction($section, $page)
+    public function sectionAction(string $section, int $page): Response
     {
-        $sitemapSectionPage = $this->getSitemapGenerator()->generateSectionPage($section, $page);
+        $sitemapSectionPage = $this->generator->generateSectionPage($section, $page);
 
         if ($sitemapSectionPage->getCount() === 0) {
             return new Response('Requested page is out of range', Response::HTTP_NOT_FOUND);
         }
 
-        return $this->render('WerkspotSitemapBundle::section.xml.twig', [
-            'sitemap_section' => $sitemapSectionPage
-        ], $this->getEmptyXmlResponse());
+        return $this->render('WerkspotSitemapBundle::section.xml.twig',
+            ['sitemap_section' => $sitemapSectionPage]
+        );
     }
 
-    /**
-     * @return Response
-     */
-    private function getEmptyXmlResponse()
+    private function render(string $template, array $context): Response
     {
-        $response = new Response(null, Response::HTTP_OK, [
-            'Content-type' => 'text/xml',
-            'X-Robots-Tag' => 'noindex'
-        ]);
-        $sharedMaxAge = $this->getServiceContainer()->getParameter('werkspot.sitemap.cache.shared_max_age');
-        $response->setSharedMaxAge($sharedMaxAge);
+        $response = new Response(
+            $this->templateEngine->render($template, $context),
+            Response::HTTP_OK,
+            ['Content-type' => 'text/xml', 'X-Robots-Tag' => 'noindex']
+        );
+        $response->setSharedMaxAge($this->sharedMaxAge);
 
         return $response;
-    }
-
-    /**
-     * @return Generator
-     */
-    private function getSitemapGenerator()
-    {
-        return $this->get('werkspot.sitemap.generator');
-    }
-
-    /**
-     * @return ContainerInterface
-     */
-    private function getServiceContainer()
-    {
-        return $this->get('service_container');
     }
 }

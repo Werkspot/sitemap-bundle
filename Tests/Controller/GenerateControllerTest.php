@@ -162,6 +162,7 @@ class GenerateControllerTest extends WebTestCase
 
         $mockSectionPage = Mockery::mock(SitemapSectionPage::class);
         $mockSectionPage->shouldReceive('getCount')->andReturn(0);
+        $mockSectionPage->shouldReceive('getUrls')->andReturn([]);
 
         $mockGenerator = Mockery::mock(Generator::class);
         $mockGenerator->shouldReceive('generateSectionPage')->andReturn($mockSectionPage);
@@ -169,6 +170,10 @@ class GenerateControllerTest extends WebTestCase
         $client->getContainer()->set('werkspot.sitemap.generator', $mockGenerator);
         $client->request('GET', $url);
 
-        $this->assertEquals(Response::HTTP_NOT_FOUND, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+
+        $xml = simplexml_load_string($client->getResponse()->getContent());
+        $this->assertEquals('urlset', $xml->getName());
+        $this->assertSame(0, $xml->count());
     }
 }

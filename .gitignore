@@ -3,3 +3,4 @@
 /composer.lock
 /Tests/Controller/app/cache
 /Tests/Controller/app/logs
+/var/

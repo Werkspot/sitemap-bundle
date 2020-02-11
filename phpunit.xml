@@ -9,6 +9,7 @@
     <php>
         <ini name="error_reporting" value="-1" />
         <env name="KERNEL_CLASS" value="AppKernel" />
+        <env name="KERNEL_DIR" value="Tests/Controller/app/" />
     </php>
 
     <testsuites>
@@ -27,7 +28,4 @@
             </exclude>
         </whitelist>
     </filter>
-    <listeners>
-        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
-    </listeners>
 </phpunit>

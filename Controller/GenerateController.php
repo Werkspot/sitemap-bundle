@@ -33,10 +33,6 @@ class GenerateController extends AbstractController
     {
         $sitemapSectionPage = $this->getSitemapGenerator()->generateSectionPage($section, $page);
 
-        if ($sitemapSectionPage->getCount() === 0) {
-            return new Response('Requested page is out of range', Response::HTTP_NOT_FOUND);
-        }
-
         return $this->render('WerkspotSitemapBundle::section.xml.twig', [
             'sitemap_section' => $sitemapSectionPage
         ], $this->getEmptyXmlResponse());

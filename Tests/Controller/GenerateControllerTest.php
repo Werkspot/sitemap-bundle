@@ -2,7 +2,6 @@
 namespace Werkspot\Bundle\SitemapBundle\Tests\Controller;
 
 use Mockery;
-use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -17,7 +16,7 @@ class GenerateControllerTest extends WebTestCase
 {
     public function testIndexAction()
     {
-        $client = $this->getClient();
+        $client = self::createClient();
         $url = $client->getContainer()->get('router')->generate(
             'werkspot_sitemap_index',
             [],
@@ -58,7 +57,7 @@ class GenerateControllerTest extends WebTestCase
         $mockSectionName = 'test';
         $mockUrlCount = 123;
 
-        $client = $this->getClient();
+        $client = self::createClient();
         $url = $client->getContainer()->get('router')->generate(
             'werkspot_sitemap_section_page',
             [
@@ -103,7 +102,7 @@ class GenerateControllerTest extends WebTestCase
         $mockSectionName = 'test';
         $mockAlternateLinkCount = 12;
 
-        $client = $this->getClient();
+        $client = self::createClient();
         $url = $client->getContainer()->get('router')->generate(
             'werkspot_sitemap_section_page',
             [
@@ -151,7 +150,7 @@ class GenerateControllerTest extends WebTestCase
         $mockPage = 20;
         $mockSectionName = 'test';
 
-        $client = $this->getClient();
+        $client = self::createClient();
         $url = $client->getContainer()->get('router')->generate(
             'werkspot_sitemap_section_page',
             [
@@ -171,13 +170,5 @@ class GenerateControllerTest extends WebTestCase
         $client->request('GET', $url);
 
         $this->assertEquals(Response::HTTP_NOT_FOUND, $client->getResponse()->getStatusCode());
-    }
-
-    /**
-     * @return Client
-     */
-    protected function getClient()
-    {
-        return static::createClient();
     }
 }

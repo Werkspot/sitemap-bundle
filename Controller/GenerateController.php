@@ -1,12 +1,12 @@
 <?php
 namespace Werkspot\Bundle\SitemapBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Werkspot\Bundle\SitemapBundle\Service\Generator;
 
-class GenerateController extends Controller
+class GenerateController extends AbstractController
 {
     /**
      * Shows the sitemap index with links to deeper sitemap sections

@@ -5,7 +5,3 @@ framework:
         engines: ['twig']
     test: ~
     assets: ~
-
-# This configuration can be removed once we go fully symfony ^4.0
-twig:
-    exception_controller:  twig.controller.exception::showAction

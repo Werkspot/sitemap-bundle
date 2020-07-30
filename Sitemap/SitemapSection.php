@@ -13,34 +13,22 @@ class SitemapSection
      */
     private $pageCount = 0;
 
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return int
-     */
-    public function getPageCount()
+    public function getPageCount(): int
     {
         return $this->pageCount;
     }
 
-    /**
-     * @param int $pageCount
-     */
-    public function setPageCount($pageCount)
+    public function setPageCount(int $pageCount): void
     {
         $this->pageCount = $pageCount;
     }

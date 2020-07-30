@@ -14,7 +14,7 @@ class Generator
     /**
      * @var ProviderInterface[]
      */
-    private $providers = [];
+    private array $providers = [];
 
     public function generateIndex(): SitemapIndex
     {

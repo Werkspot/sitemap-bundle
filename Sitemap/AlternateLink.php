@@ -10,15 +10,9 @@ namespace Werkspot\Bundle\SitemapBundle\Sitemap;
  */
 class AlternateLink
 {
-    /**
-     * @var string
-     */
-    private $href;
+    private string $href;
 
-    /**
-     * @var string
-     */
-    private $hreflang;
+    private string $hreflang;
 
     public function __construct(string $href, string $hreflang)
     {

@@ -6,15 +6,9 @@ namespace Werkspot\Bundle\SitemapBundle\Sitemap;
 
 class SitemapSection
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var int
-     */
-    private $pageCount = 0;
+    private int $pageCount = 0;
 
     public function __construct(string $name)
     {

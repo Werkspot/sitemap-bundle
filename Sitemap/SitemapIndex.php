@@ -9,7 +9,7 @@ class SitemapIndex
     /**
      * @var SitemapSection
      */
-    private $sections = [];
+    private array $sections = [];
 
     public function addSection(SitemapSection $section): void
     {

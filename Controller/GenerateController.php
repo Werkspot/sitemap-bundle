@@ -10,20 +10,11 @@ use Werkspot\Bundle\SitemapBundle\Service\Generator;
 
 final class GenerateController
 {
-    /**
-     * @var int
-     */
-    private $cacheAge;
+    private int $cacheAge;
 
-    /**
-     * @var Environment
-     */
-    private $twig;
+    private Environment $twig;
 
-    /**
-     * @var Generator
-     */
-    private $sitemapGenerator;
+    private Generator $sitemapGenerator;
 
     public function __construct(int $cacheAge, Generator $sitemapGenerator, Environment $twig)
     {

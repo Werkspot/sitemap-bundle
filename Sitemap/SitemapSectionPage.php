@@ -16,7 +16,7 @@ class SitemapSectionPage
     /**
      * @var Url[]
      */
-    private $urls = [];
+    private array $urls = [];
 
     public function addUrl(Url $url): void
     {

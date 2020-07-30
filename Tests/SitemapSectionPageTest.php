@@ -16,10 +16,7 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
  */
 final class SitemapSectionPageTest extends TestCase
 {
-    /**
-     * @var SitemapSectionPage
-     */
-    protected $page;
+    protected SitemapSectionPage $page;
 
     protected function setUp(): void
     {

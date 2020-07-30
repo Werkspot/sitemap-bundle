@@ -4,3 +4,5 @@
 /Tests/Controller/app/cache
 /Tests/Controller/app/logs
 /var/
+.phpunit.result.cache
+.php_cs.cache

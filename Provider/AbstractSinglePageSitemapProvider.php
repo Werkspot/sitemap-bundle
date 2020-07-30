@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Provider;
 
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;

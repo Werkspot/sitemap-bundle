@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Tests\Service;
 
 use Mockery;
@@ -7,7 +10,12 @@ use Werkspot\Bundle\SitemapBundle\Provider\ProviderInterface;
 use Werkspot\Bundle\SitemapBundle\Service\Generator;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
 
-class GeneratorTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class GeneratorTest extends TestCase
 {
     /**
      * @var Generator
@@ -16,10 +24,13 @@ class GeneratorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->generator = new Generator;
+        $this->generator = new Generator();
     }
 
-    public function testGenerateIndexWithEmptyCount(): void
+    /**
+     * @test
+     */
+    public function generate_index_with_empty_count(): void
     {
         $mockProvider = Mockery::mock(ProviderInterface::class);
 
@@ -29,10 +40,13 @@ class GeneratorTest extends TestCase
         $this->generator->addProvider($mockProvider);
         $index = $this->generator->generateIndex();
 
-        $this->assertEmpty($index->getSections());
+        self::assertEmpty($index->getSections());
     }
 
-    public function testGenerateIndex(): void
+    /**
+     * @test
+     */
+    public function generate_index(): void
     {
         $mockCount = 1234;
         $mockSection = Mockery::mock(SitemapSection::class);
@@ -46,6 +60,6 @@ class GeneratorTest extends TestCase
         $this->generator->addProvider($mockProvider);
         $index = $this->generator->generateIndex();
 
-        $this->assertEquals([$mockSection], $index->getSections());
+        self::assertEquals([$mockSection], $index->getSections());
     }
 }

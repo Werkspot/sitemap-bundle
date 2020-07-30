@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Tests;
 
 use Mockery;
@@ -6,13 +9,17 @@ use PHPUnit\Framework\TestCase;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
 use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
 
-class SitemapSectionPageTest extends TestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class SitemapSectionPageTest extends TestCase
 {
     /**
      * @var SitemapSectionPage
      */
     protected $page;
-
 
     protected function setUp(): void
     {
@@ -21,19 +28,25 @@ class SitemapSectionPageTest extends TestCase
         $this->page = new SitemapSectionPage();
     }
 
-    public function testGetUrls(): void
+    /**
+     * @test
+     */
+    public function get_urls(): void
     {
         $mockUrl = Mockery::mock(Url::class);
-        $this->assertEquals([], $this->page->getUrls());
+        self::assertEquals([], $this->page->getUrls());
         $this->page->addUrl($mockUrl);
-        $this->assertEquals([$mockUrl], $this->page->getUrls());
+        self::assertEquals([$mockUrl], $this->page->getUrls());
     }
 
-    public function testCountUrls(): void
+    /**
+     * @test
+     */
+    public function count_urls(): void
     {
         $mockUrl = Mockery::mock(Url::class);
-        $this->assertEquals(0, $this->page->getCount());
+        self::assertEquals(0, $this->page->getCount());
         $this->page->addUrl($mockUrl);
-        $this->assertEquals(1, $this->page->getCount());
+        self::assertEquals(1, $this->page->getCount());
     }
 }

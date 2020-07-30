@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -8,10 +10,10 @@ use Werkspot\Bundle\SitemapBundle\DependencyInjection\Compiler\ProviderCompilerP
 
 class WerkspotSitemapBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
-        $container->addCompilerPass(new ProviderCompilerPass);
+        $container->addCompilerPass(new ProviderCompilerPass());
     }
 }

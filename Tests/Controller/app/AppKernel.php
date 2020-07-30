@@ -1,7 +1,9 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
+declare(strict_types=1);
+
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * Class AppKernel
@@ -13,7 +15,7 @@ class AppKernel extends Kernel
         return [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Werkspot\Bundle\SitemapBundle\WerkspotSitemapBundle()
+            new Werkspot\Bundle\SitemapBundle\WerkspotSitemapBundle(),
         ];
     }
 

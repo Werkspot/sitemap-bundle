@@ -1,8 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 use Werkspot\Bundle\SitemapBundle\Service\Generator;
@@ -39,7 +40,7 @@ final class GenerateController
         $index = $this->sitemapGenerator->generateIndex();
 
         return $this->render('@WerkspotSitemapBundle/index.xml.twig', [
-            'sitemap_index' => $index
+            'sitemap_index' => $index,
         ], $this->getEmptyXmlResponse());
     }
 
@@ -51,7 +52,7 @@ final class GenerateController
         $sitemapSectionPage = $this->sitemapGenerator->generateSectionPage($section, $page);
 
         return $this->render('@WerkspotSitemapBundle/section.xml.twig', [
-            'sitemap_section' => $sitemapSectionPage
+            'sitemap_section' => $sitemapSectionPage,
         ], $this->getEmptyXmlResponse());
     }
 
@@ -59,7 +60,7 @@ final class GenerateController
     {
         $response = new Response(null, Response::HTTP_OK, [
             'Content-type' => 'text/xml',
-            'X-Robots-Tag' => 'noindex'
+            'X-Robots-Tag' => 'noindex',
         ]);
         $response->setSharedMaxAge($this->cacheAge);
 
@@ -70,7 +71,7 @@ final class GenerateController
     {
         $content = $this->twig->render($view, $parameters);
 
-        if (null === $response) {
+        if ($response === null) {
             $response = new Response();
         }
 

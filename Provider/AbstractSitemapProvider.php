@@ -10,10 +10,7 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
 
 abstract class AbstractSitemapProvider implements ProviderInterface
 {
-    /**
-     * @var UrlGeneratorInterface
-     */
-    protected $urlGenerator;
+    protected UrlGeneratorInterface $urlGenerator;
 
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
@@ -22,7 +19,7 @@ abstract class AbstractSitemapProvider implements ProviderInterface
 
     final public function getNumberOfPages(): int
     {
-        return ceil($this->getCount() / $this->getMaxItemsPerPage());
+        return (int) ceil($this->getCount() / $this->getMaxItemsPerPage());
     }
 
     public function getSection(): SitemapSection
@@ -30,7 +27,7 @@ abstract class AbstractSitemapProvider implements ProviderInterface
         return new SitemapSection($this->getSectionName());
     }
 
-    final protected function generateUrl(strintg $routeName, array $options = []): string
+    final protected function generateUrl(string $routeName, array $options = []): string
     {
         return $this->urlGenerator->generate($routeName, $options, UrlGeneratorInterface::ABSOLUTE_URL);
     }

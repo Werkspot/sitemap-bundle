@@ -18,32 +18,22 @@ class Url
 
     /**
      * Absolute url
-     *
-     * @var string
      */
-    protected $loc;
+    protected string $loc;
 
-    /**
-     * @var DateTime|null
-     */
-    protected $lastmod;
+    protected ?DateTime $lastmod;
 
-    /**
-     * @var string|null
-     */
-    protected $changefreq;
+    protected ?string $changefreq;
 
     /**
      * String in float format
-     *
-     * @var string|null
      */
-    protected $priority;
+    protected ?string $priority;
 
     /**
      * @var AlternateLink[]
      */
-    protected $alternateLinks;
+    protected array $alternateLinks = [];
 
     public function __construct(string $loc, ?string $changefreq = null, ?float $priority = null, ?DateTime $lastmod = null)
     {

@@ -17,10 +17,7 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
  */
 final class GeneratorTest extends TestCase
 {
-    /**
-     * @var Generator
-     */
-    private $generator;
+    private Generator $generator;
 
     protected function setUp(): void
     {

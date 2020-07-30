@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Sitemap;
 
 use DateTime;
@@ -100,7 +103,7 @@ class Url
         return $this->changefreq;
     }
 
-    public function setPriority(float $priority)
+    public function setPriority(float $priority): void
     {
         if ($priority >= 0 && $priority <= 1) {
             $this->priority = sprintf('%01.1f', $priority);

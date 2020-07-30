@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Tests\Controller;
 
 use Mockery;
@@ -12,9 +15,17 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
 use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
 
-class GenerateControllerTest extends WebTestCase
+/**
+ * @internal
+ *
+ * @small
+ */
+final class GenerateControllerTest extends WebTestCase
 {
-    public function testIndexAction(): void
+    /**
+     * @test
+     */
+    public function index_action(): void
     {
         $client = self::createClient();
         $url = $client->getContainer()->get('router')->generate(
@@ -30,7 +41,7 @@ class GenerateControllerTest extends WebTestCase
         $mockSection->shouldReceive('getPageCount')->andReturn($mockPageCount);
 
         $mockSections = [
-            $mockSection
+            $mockSection,
         ];
 
         $mockSitemapIndex = Mockery::mock(SitemapIndex::class);
@@ -42,16 +53,19 @@ class GenerateControllerTest extends WebTestCase
         $client->getContainer()->set('werkspot.sitemap.generator', $mockGenerator);
         $client->request('GET', $url);
 
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 
-        $this->assertEquals($mockPageCount, count($xml->sitemap));
-        $this->assertGreaterThan(0, $client->getResponse()->getTtl());
+        self::assertEquals($mockPageCount, count($xml->sitemap));
+        self::assertGreaterThan(0, $client->getResponse()->getTtl());
     }
 
-    public function testSectionAction(): void
+    /**
+     * @test
+     */
+    public function section_action(): void
     {
         $mockPage = 20;
         $mockSectionName = 'test';
@@ -62,14 +76,14 @@ class GenerateControllerTest extends WebTestCase
             'werkspot_sitemap_section_page',
             [
                 'section' => $mockSectionName,
-                'page'    => $mockPage
+                'page' => $mockPage,
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $mockUrls = [];
 
-        for ($i = 1; $i <= $mockUrlCount; $i++) {
+        for ($i = 1; $i <= $mockUrlCount; ++$i) {
             $mockUrl = Mockery::mock(Url::class);
             $mockUrl->shouldIgnoreMissing();
             $mockUrls[] = $mockUrl;
@@ -85,18 +99,21 @@ class GenerateControllerTest extends WebTestCase
         $client->getContainer()->set('werkspot.sitemap.generator', $mockGenerator);
         $client->request('GET', $url);
 
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 
-        $this->assertEquals($mockUrlCount, count($xml->url));
-        $this->assertEquals(0, count($xml->url[0]->children('xhtml', true)));
-        $this->assertGreaterThan(0, $client->getResponse()->getTtl());
-        $this->assertGreaterThan(0, $client->getResponse()->getMaxAge());
+        self::assertEquals($mockUrlCount, count($xml->url));
+        self::assertCount(0, $xml->url[0]->children('xhtml', true));
+        self::assertGreaterThan(0, $client->getResponse()->getTtl());
+        self::assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }
 
-    public function testSectionActionWithAlternateLinks(): void
+    /**
+     * @test
+     */
+    public function section_action_with_alternate_links(): void
     {
         $mockPage = 1;
         $mockSectionName = 'test';
@@ -107,7 +124,7 @@ class GenerateControllerTest extends WebTestCase
             'werkspot_sitemap_section_page',
             [
                 'section' => $mockSectionName,
-                'page'    => $mockPage
+                'page' => $mockPage,
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
@@ -116,7 +133,7 @@ class GenerateControllerTest extends WebTestCase
         $mockUrl->shouldIgnoreMissing();
 
         $mockAlternateLinks = [];
-        for ($i = 1; $i <= $mockAlternateLinkCount; $i++) {
+        for ($i = 1; $i <= $mockAlternateLinkCount; ++$i) {
             $mockAlternateLink = Mockery::mock(AlternateLink::class);
             $mockAlternateLink->shouldIgnoreMissing();
             $mockAlternateLinks[] = $mockAlternateLink;
@@ -135,17 +152,20 @@ class GenerateControllerTest extends WebTestCase
         $client->getContainer()->set('werkspot.sitemap.generator', $mockGenerator);
         $client->request('GET', $url);
 
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
-        $this->assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals('noindex', $client->getResponse()->headers->get('X-Robots-Tag'));
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 
-        $this->assertEquals($mockAlternateLinkCount, count($xml->url[0]->children('xhtml', true)));
-        $this->assertGreaterThan(0, $client->getResponse()->getTtl());
-        $this->assertGreaterThan(0, $client->getResponse()->getMaxAge());
+        self::assertEquals($mockAlternateLinkCount, count($xml->url[0]->children('xhtml', true)));
+        self::assertGreaterThan(0, $client->getResponse()->getTtl());
+        self::assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }
 
-    public function testSectionActionOutOfRange(): void
+    /**
+     * @test
+     */
+    public function section_action_out_of_range(): void
     {
         $mockPage = 20;
         $mockSectionName = 'test';
@@ -155,7 +175,7 @@ class GenerateControllerTest extends WebTestCase
             'werkspot_sitemap_section_page',
             [
                 'section' => $mockSectionName,
-                'page'    => $mockPage
+                'page' => $mockPage,
             ],
             UrlGeneratorInterface::ABSOLUTE_URL
         );
@@ -170,10 +190,10 @@ class GenerateControllerTest extends WebTestCase
         $client->getContainer()->set('werkspot.sitemap.generator', $mockGenerator);
         $client->request('GET', $url);
 
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
-        $this->assertEquals('urlset', $xml->getName());
-        $this->assertSame(0, $xml->count());
+        self::assertEquals('urlset', $xml->getName());
+        self::assertSame(0, $xml->count());
     }
 }

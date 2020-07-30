@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Werkspot\Bundle\SitemapBundle\Service;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -32,7 +35,7 @@ class Generator
     {
         $provider = $this->getProvider($sectionName);
 
-        if (null === $provider) {
+        if ($provider === null) {
             throw new NotFoundHttpException('No provider found for the given sitemap section');
         }
 

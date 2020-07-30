@@ -13,10 +13,7 @@ class Generator
      */
     private $providers = [];
 
-    /**
-     * @return SitemapIndex
-     */
-    public function generateIndex()
+    public function generateIndex(): SitemapIndex
     {
         $index = new SitemapIndex();
 
@@ -31,12 +28,7 @@ class Generator
         return $index;
     }
 
-    /**
-     * @param string $sectionName
-     * @param int $page
-     * @return SitemapSectionPage
-     */
-    public function generateSectionPage($sectionName, $page)
+    public function generateSectionPage(string $sectionName, int $page): SitemapSectionPage
     {
         $provider = $this->getProvider($sectionName);
 
@@ -47,19 +39,12 @@ class Generator
         return $provider->getPage($page);
     }
 
-    /**
-     * @param ProviderInterface $provider
-     */
-    public function addProvider(ProviderInterface $provider)
+    public function addProvider(ProviderInterface $provider): void
     {
         $this->providers[$provider->getSectionName()] = $provider;
     }
 
-    /**
-     * @param string $sectionName
-     * @return null|ProviderInterface
-     */
-    private function getProvider($sectionName)
+    private function getProvider(string $sectionName): ?ProviderInterface
     {
         return isset($this->providers[$sectionName]) ? $this->providers[$sectionName] : null;
     }

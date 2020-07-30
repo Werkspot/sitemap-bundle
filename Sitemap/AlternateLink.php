@@ -17,28 +17,18 @@ class AlternateLink
      */
     private $hreflang;
 
-    /**
-     * @param string $href
-     * @param string $hreflang
-     */
-    public function __construct($href, $hreflang)
+    public function __construct(string $href, string $hreflang)
     {
         $this->href = $href;
         $this->hreflang = $hreflang;
     }
 
-    /**
-     * @return string
-     */
-    public function getHref()
+    public function getHref(): string
     {
         return $this->href;
     }
 
-    /**
-     * @return string
-     */
-    public function getHreflang()
+    public function getHreflang(): string
     {
         return $this->hreflang;
     }

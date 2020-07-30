@@ -2,25 +2,22 @@ language: php
 dist: trusty
 
 php:
-  - 7.1
   - 7.2
   - 7.3
   - 7.4
 
 env:
   matrix:
-    - SYMFONY_VERSION="^4.1"
+    - SYMFONY_VERSION="^4.4"
 
 matrix:
   include:
-    - php: 7.1
-      env: SYMFONY_VERSION="^4.1"
     - php: 7.2
       env: SYMFONY_VERSION="^4.1"
-    - php: 7.3
-      env: SYMFONY_VERSION="^4.1"
+    - php: 7.2
+      env: SYMFONY_VERSION="^5.1"
     - php: 7.4
-      env: SYMFONY_VERSION="^4.1"
+      env: SYMFONY_VERSION="^5.1"
 
 before_script:
     - curl -s http://getcomposer.org/installer | php

@@ -12,48 +12,30 @@ abstract class AbstractSitemapProvider implements ProviderInterface
      */
     protected $urlGenerator;
 
-    /**
-     * @param UrlGeneratorInterface $urlGenerator
-     */
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }
 
-    /**
-     * @return int
-     */
-    final public function getNumberOfPages()
+    final public function getNumberOfPages(): int
     {
         return ceil($this->getCount() / $this->getMaxItemsPerPage());
     }
 
-    /**
-     * @return SitemapSection
-     */
-    public function getSection()
+    public function getSection(): SitemapSection
     {
         return new SitemapSection($this->getSectionName());
     }
 
-    /**
-     * @param string $routeName
-     * @param array $options
-     * @return string
-     */
-    final protected function generateUrl($routeName, $options = [])
+    final protected function generateUrl(strintg $routeName, array $options = []): string
     {
         return $this->urlGenerator->generate($routeName, $options, UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     /**
      * Just to get consistent paging even with smaller limits
-     *
-     * @param array $data
-     * @param int $page
-     * @return array
      */
-    protected function getSimpleArrayPage(array $data, $page)
+    protected function getSimpleArrayPage(array $data, int $page): array
     {
         $limit = $this->getMaxItemsPerPage();
         $offset = ($page - 1) * $limit;
@@ -61,10 +43,7 @@ abstract class AbstractSitemapProvider implements ProviderInterface
         return array_slice($data, $offset, $limit);
     }
 
-    /**
-     * @return int
-     */
-    protected function getMaxItemsPerPage()
+    protected function getMaxItemsPerPage(): int
     {
         return SitemapSectionPage::MAX_ITEMS_PER_PAGE;
     }

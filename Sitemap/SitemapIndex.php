@@ -6,12 +6,9 @@ class SitemapIndex
     /**
      * @var SitemapSection
      */
-    private $sections;
+    private $sections = [];
 
-    /**
-     * @param SitemapSection $section
-     */
-    public function addSection(SitemapSection $section)
+    public function addSection(SitemapSection $section): void
     {
         $this->sections[] = $section;
     }
@@ -19,7 +16,7 @@ class SitemapIndex
     /**
      * @return SitemapSection[]
      */
-    public function getSections()
+    public function getSections(): array
     {
         return $this->sections;
     }

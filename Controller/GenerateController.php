@@ -4,68 +4,78 @@ namespace Werkspot\Bundle\SitemapBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
 use Werkspot\Bundle\SitemapBundle\Service\Generator;
 
-class GenerateController extends AbstractController
+final class GenerateController
 {
     /**
-     * Shows the sitemap index with links to deeper sitemap sections
-     *
-     * @return Response
+     * @var int
      */
-    public function indexAction()
-    {
-        $index = $this->getSitemapGenerator()->generateIndex();
+    private $cacheAge;
 
-        return $this->render('WerkspotSitemapBundle::index.xml.twig', [
+    /**
+     * @var Environment
+     */
+    private $twig;
+
+    /**
+     * @var Generator
+     */
+    private $sitemapGenerator;
+
+    public function __construct(int $cacheAge, Generator $sitemapGenerator, Environment $twig)
+    {
+        $this->cacheAge = $cacheAge;
+        $this->twig = $twig;
+        $this->sitemapGenerator = $sitemapGenerator;
+    }
+
+    /**
+     * Shows the sitemap index with links to deeper sitemap sections
+     */
+    public function indexAction(): Response
+    {
+        $index = $this->sitemapGenerator->generateIndex();
+
+        return $this->render('@WerkspotSitemapBundle/index.xml.twig', [
             'sitemap_index' => $index
         ], $this->getEmptyXmlResponse());
     }
 
     /**
      * Renders a single sitemap section
-     * @param string $section
-     * @param int $page
-     *
-     * @return Response
      */
-    public function sectionAction($section, $page)
+    public function sectionAction(string $section, int $page): Response
     {
-        $sitemapSectionPage = $this->getSitemapGenerator()->generateSectionPage($section, $page);
+        $sitemapSectionPage = $this->sitemapGenerator->generateSectionPage($section, $page);
 
-        return $this->render('WerkspotSitemapBundle::section.xml.twig', [
+        return $this->render('@WerkspotSitemapBundle/section.xml.twig', [
             'sitemap_section' => $sitemapSectionPage
         ], $this->getEmptyXmlResponse());
     }
 
-    /**
-     * @return Response
-     */
-    private function getEmptyXmlResponse()
+    private function getEmptyXmlResponse(): Response
     {
         $response = new Response(null, Response::HTTP_OK, [
             'Content-type' => 'text/xml',
             'X-Robots-Tag' => 'noindex'
         ]);
-        $sharedMaxAge = $this->getServiceContainer()->getParameter('werkspot.sitemap.cache.shared_max_age');
-        $response->setSharedMaxAge($sharedMaxAge);
+        $response->setSharedMaxAge($this->cacheAge);
 
         return $response;
     }
 
-    /**
-     * @return Generator
-     */
-    private function getSitemapGenerator()
+    protected function render(string $view, array $parameters = [], Response $response = null): Response
     {
-        return $this->get('werkspot.sitemap.generator');
-    }
+        $content = $this->twig->render($view, $parameters);
 
-    /**
-     * @return ContainerInterface
-     */
-    private function getServiceContainer()
-    {
-        return $this->get('service_container');
+        if (null === $response) {
+            $response = new Response();
+        }
+
+        $response->setContent($content);
+
+        return $response;
     }
 }

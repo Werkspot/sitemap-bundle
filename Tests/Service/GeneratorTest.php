@@ -2,23 +2,24 @@
 namespace Werkspot\Bundle\SitemapBundle\Tests\Service;
 
 use Mockery;
+use PHPUnit\Framework\TestCase;
 use Werkspot\Bundle\SitemapBundle\Provider\ProviderInterface;
 use Werkspot\Bundle\SitemapBundle\Service\Generator;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
 
-class GeneratorTest extends \PHPUnit_Framework_TestCase
+class GeneratorTest extends TestCase
 {
     /**
      * @var Generator
      */
     private $generator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->generator = new Generator;
     }
 
-    public function testGenerateIndexWithEmptyCount()
+    public function testGenerateIndexWithEmptyCount(): void
     {
         $mockProvider = Mockery::mock(ProviderInterface::class);
 
@@ -31,7 +32,7 @@ class GeneratorTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($index->getSections());
     }
 
-    public function testGenerateIndex()
+    public function testGenerateIndex(): void
     {
         $mockCount = 1234;
         $mockSection = Mockery::mock(SitemapSection::class);

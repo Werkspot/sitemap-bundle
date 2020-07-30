@@ -5,13 +5,13 @@ use DateTime;
 
 class Url
 {
-    const CHANGEFREQ_ALWAYS = 'always';
-    const CHANGEFREQ_HOURLY = 'hourly';
-    const CHANGEFREQ_DAILY = 'daily';
-    const CHANGEFREQ_WEEKLY = 'weekly';
-    const CHANGEFREQ_MONTHLY = 'monthly';
-    const CHANGEFREQ_YEARLY = 'yearly';
-    const CHANGEFREQ_NEVER = 'never';
+    public const CHANGEFREQ_ALWAYS = 'always';
+    public const CHANGEFREQ_HOURLY = 'hourly';
+    public const CHANGEFREQ_DAILY = 'daily';
+    public const CHANGEFREQ_WEEKLY = 'weekly';
+    public const CHANGEFREQ_MONTHLY = 'monthly';
+    public const CHANGEFREQ_YEARLY = 'yearly';
+    public const CHANGEFREQ_NEVER = 'never';
 
     /**
      * Absolute url
@@ -42,15 +42,7 @@ class Url
      */
     protected $alternateLinks;
 
-    /**
-     * Construct a new basic url
-     *
-     * @param string $loc - absolute url
-     * @param DateTime|null $lastmod
-     * @param string|null $changefreq
-     * @param float|null $priority
-     */
-    public function __construct($loc, $changefreq = null, $priority = null, DateTime $lastmod = null)
+    public function __construct(string $loc, ?string $changefreq = null, ?float $priority = null, ?DateTime $lastmod = null)
     {
         $this->setLoc($loc);
         $this->setLastmod($lastmod);
@@ -61,44 +53,27 @@ class Url
         }
     }
 
-    /**
-     * @param string $loc
-     */
-    protected function setLoc($loc)
+    protected function setLoc(string $loc): void
     {
         $this->loc = $loc;
     }
 
-    /**
-     * @return string
-     */
-    public function getLoc()
+    public function getLoc(): string
     {
         return $this->loc;
     }
 
-    /**
-     * @param DateTime|null $lastmod
-     */
-    protected function setLastmod(DateTime $lastmod = null)
+    protected function setLastmod(DateTime $lastmod = null): void
     {
         $this->lastmod = $lastmod;
     }
 
-    /**
-     * @return DateTime|null
-     */
-    public function getLastmod()
+    public function getLastmod(): ?DateTime
     {
         return $this->lastmod;
     }
 
-    /**
-     * Define the change frequency of this entry
-     *
-     * @param string|null $changefreq - String or null value used for defining the change frequency
-     */
-    protected function setChangefreq($changefreq = null)
+    protected function setChangefreq(string $changefreq = null): void
     {
         if (!in_array(
             $changefreq,
@@ -120,40 +95,26 @@ class Url
         $this->changefreq = $changefreq;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getChangefreq()
+    public function getChangefreq(): ?string
     {
         return $this->changefreq;
     }
 
-    /**
-     * Define the priority of this entry
-     *
-     * @param float $priority - Float or null value used for defining the priority
-     */
-    public function setPriority($priority)
+    public function setPriority(float $priority)
     {
-        if (is_numeric($priority) && $priority >= 0 && $priority <= 1) {
+        if ($priority >= 0 && $priority <= 1) {
             $this->priority = sprintf('%01.1f', $priority);
         } else {
             throw new \RuntimeException(sprintf('The value "%s" is not supported by the option priority, it must be a numeric between 0.0 and 1.0. See http://www.sitemaps.org/protocol.html#xmlTagDefinitions', $priority));
         }
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPriority()
+    public function getPriority(): ?string
     {
         return $this->priority;
     }
 
-    /**
-     * @param AlternateLink $alternateLink
-     */
-    public function addAlternateLink(AlternateLink $alternateLink)
+    public function addAlternateLink(AlternateLink $alternateLink): void
     {
         $this->alternateLinks[] = $alternateLink;
     }
@@ -161,7 +122,7 @@ class Url
     /**
      * @return AlternateLink[]
      */
-    public function getAlternateLinks()
+    public function getAlternateLinks(): array
     {
         return $this->alternateLinks;
     }

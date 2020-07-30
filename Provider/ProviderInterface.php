@@ -6,29 +6,9 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
 
 interface ProviderInterface
 {
-    /**
-     * @return SitemapSection
-     */
-    public function getSection();
-
-    /**
-     * @return string
-     */
-    public function getSectionName();
-
-    /**
-     * @return int
-     */
-    public function getNumberOfPages();
-
-    /**
-     * @return int
-     */
-    public function getCount();
-
-    /**
-     * @param int $pageNumber
-     * @return SitemapSectionPage
-     */
-    public function getPage($pageNumber);
+    public function getSection(): SitemapSection;
+    public function getSectionName(): string;
+    public function getNumberOfPages(): int;
+    public function getCount(): int;
+    public function getPage(int $pageNumber): SitemapSectionPage;
 }

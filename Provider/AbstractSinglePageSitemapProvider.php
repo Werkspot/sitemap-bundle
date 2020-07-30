@@ -8,11 +8,7 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
  */
 abstract class AbstractSinglePageSitemapProvider extends AbstractSitemapProvider
 {
-    /**
-     * @param int $pageNumber
-     * @return SitemapSectionPage
-     */
-    final public function getPage($pageNumber)
+    final public function getPage(int $pageNumber): SitemapSectionPage
     {
         if ($pageNumber > 1) {
             return new SitemapSectionPage();
@@ -21,17 +17,12 @@ abstract class AbstractSinglePageSitemapProvider extends AbstractSitemapProvider
         return $this->getSinglePage();
     }
 
-    /**
-     * @return SitemapSectionPage
-     */
-    abstract public function getSinglePage();
+    abstract public function getSinglePage(): SitemapSectionPage;
 
     /**
      * Returning number of results just enough to indicate one page
-     *
-     * @return int
      */
-    final public function getCount()
+    final public function getCount(): int
     {
         return 1;
     }

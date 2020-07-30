@@ -14,7 +14,7 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
 
 class GenerateControllerTest extends WebTestCase
 {
-    public function testIndexAction()
+    public function testIndexAction(): void
     {
         $client = self::createClient();
         $url = $client->getContainer()->get('router')->generate(
@@ -51,7 +51,7 @@ class GenerateControllerTest extends WebTestCase
         $this->assertGreaterThan(0, $client->getResponse()->getTtl());
     }
 
-    public function testSectionAction()
+    public function testSectionAction(): void
     {
         $mockPage = 20;
         $mockSectionName = 'test';
@@ -96,7 +96,7 @@ class GenerateControllerTest extends WebTestCase
         $this->assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }
 
-    public function testSectionActionWithAlternateLinks()
+    public function testSectionActionWithAlternateLinks(): void
     {
         $mockPage = 1;
         $mockSectionName = 'test';
@@ -145,7 +145,7 @@ class GenerateControllerTest extends WebTestCase
         $this->assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }
 
-    public function testSectionActionOutOfRange()
+    public function testSectionActionOutOfRange(): void
     {
         $mockPage = 20;
         $mockSectionName = 'test';

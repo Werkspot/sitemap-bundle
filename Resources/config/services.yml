@@ -1,7 +1,15 @@
 parameters:
-    werkspot.sitemap.cache.shared_max_age: 86400
+  werkspot.sitemap.cache.shared_max_age: 86400
 
 services:
-    werkspot.sitemap.generator:
-        class: Werkspot\Bundle\SitemapBundle\Service\Generator
-        public: true
+  _defaults:
+    autowire: true
+    public: true
+
+  werkspot.sitemap.generator:
+    class: Werkspot\Bundle\SitemapBundle\Service\Generator
+
+  Werkspot\Bundle\SitemapBundle\Controller\GenerateController:
+    arguments:
+      $cacheAge: '%werkspot.sitemap.cache.shared_max_age%'
+      $sitemapGenerator: '@werkspot.sitemap.generator'

@@ -6,6 +6,7 @@
             <loc>{{ url.loc }}</loc>
             <changefreq>{{ url.changefreq }}</changefreq>
             {% if url.priority %}<priority>{{ url.priority }}</priority>{% endif %}
+            {% if url.lastmod %}<lastmod>{{ url.lastmod|date('c') }}</lastmod>{% endif %}
             {% for alternateLink in url.alternateLinks %}
                 <xhtml:link rel="alternate" hreflang="{{ alternateLink.hreflang }}" href="{{ alternateLink.href }}" />
             {% endfor %}

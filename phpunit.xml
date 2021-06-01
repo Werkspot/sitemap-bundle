@@ -1,31 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="vendor/autoload.php"
-        >
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd" backupGlobals="false" colors="true"
+         bootstrap="vendor/autoload.php">
+    <coverage>
+        <include>
+            <directory>./</directory>
+        </include>
+        <exclude>
+            <directory>./vendor</directory>
+            <directory>./Resources</directory>
+            <directory>./Tests</directory>
+        </exclude>
+    </coverage>
     <php>
-        <ini name="error_reporting" value="-1" />
-        <env name="KERNEL_CLASS" value="AppKernel" />
-        <env name="KERNEL_DIR" value="Tests/Controller/app/" />
+        <ini name="error_reporting" value="-1"/>
+        <env name="KERNEL_CLASS" value="AppKernel"/>
+        <env name="KERNEL_DIR" value="Tests/Controller/app/"/>
     </php>
-
     <testsuites>
         <testsuite name="Werkspot sitemap-bundle Test Suite">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory>./</directory>
-            <exclude>
-                <directory>./vendor</directory>
-                <directory>./Resources</directory>
-                <directory>./Tests</directory>
-            </exclude>
-        </whitelist>
-    </filter>
 </phpunit>

@@ -26,21 +26,21 @@
         }
     ],
     "require": {
-        "php": "^7.4",
-        "symfony/framework-bundle": "^4.4 || ^5.1"
+        "php": "^7.4 || ^8.0",
+        "symfony/framework-bundle": "^4.4 || ^5.2"
     },
     "require-dev": {
         "ext-simplexml": "*",
-        "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^9.0",
-        "symfony/finder": "^4.4 || ^5.1",
-        "symfony/asset": "^4.4 || ^5.1",
-        "symfony/templating": "^4.4 || 5.1",
-        "symfony/browser-kit": "^4.4 || ^5.1",
-        "symfony/twig-bridge": "^4.4 || ^5.1",
-        "symfony/twig-bundle": "^4.4 || ^5.1",
-        "symfony/yaml": "^4.4 || ^5.1",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "mockery/mockery": "^1.4",
+        "phpunit/phpunit": "^9.5",
+        "symfony/finder": "^4.4 || ^5.2",
+        "symfony/asset": "^4.4 || ^5.2",
+        "symfony/templating": "^4.4 || 5.2",
+        "symfony/browser-kit": "^4.4 || ^5.2",
+        "symfony/twig-bridge": "^4.4 || ^5.2",
+        "symfony/twig-bundle": "^4.4 || ^5.2",
+        "symfony/yaml": "^4.4 || ^5.2",
+        "friendsofphp/php-cs-fixer": "^v2.18"
     },
     "config": {
         "bin-dir": "vendor/bin"

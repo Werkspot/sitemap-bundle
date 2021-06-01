@@ -1,12 +1,13 @@
 language: php
-dist: trusty
+dist: bionic
 
 php:
   - 7.4
+  - 8.0
 
 env:
   - SYMFONY_VERSION="^4.4"
-  - SYMFONY_VERSION="^5.1"
+  - SYMFONY_VERSION="^5.2"
 
 before_script:
     - curl -s http://getcomposer.org/installer | php

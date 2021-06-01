@@ -58,7 +58,7 @@ final class GenerateController
         return $response;
     }
 
-    protected function render(string $view, array $parameters = [], Response $response = null): Response
+    private function render(string $view, array $parameters = [], Response $response = null): Response
     {
         $content = $this->twig->render($view, $parameters);
 

@@ -19,9 +19,6 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('werkspot_sitemap');
-
-        return $treeBuilder;
+        return new TreeBuilder('werkspot_sitemap');
     }
 }

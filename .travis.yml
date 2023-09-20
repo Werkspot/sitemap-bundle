@@ -4,6 +4,8 @@ dist: bionic
 php:
   - 7.4
   - 8.0
+  - 8.1
+  - 8.2
 
 env:
   - SYMFONY_VERSION="^4.4"

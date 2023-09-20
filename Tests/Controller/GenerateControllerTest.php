@@ -58,7 +58,7 @@ final class GenerateControllerTest extends WebTestCase
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 
-        self::assertEquals($mockPageCount, count($xml->sitemap));
+        self::assertCount($mockPageCount, $xml->sitemap);
         self::assertGreaterThan(0, $client->getResponse()->getTtl());
     }
 
@@ -104,7 +104,7 @@ final class GenerateControllerTest extends WebTestCase
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 
-        self::assertEquals($mockUrlCount, count($xml->url));
+        self::assertCount($mockUrlCount, $xml->url);
         self::assertCount(0, $xml->url[0]->children('xhtml', true));
         self::assertGreaterThan(0, $client->getResponse()->getTtl());
         self::assertGreaterThan(0, $client->getResponse()->getMaxAge());
@@ -157,7 +157,7 @@ final class GenerateControllerTest extends WebTestCase
 
         $xml = simplexml_load_string($client->getResponse()->getContent());
 
-        self::assertEquals($mockAlternateLinkCount, count($xml->url[0]->children('xhtml', true)));
+        self::assertCount($mockAlternateLinkCount, $xml->url[0]->children('xhtml', true));
         self::assertGreaterThan(0, $client->getResponse()->getTtl());
         self::assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }

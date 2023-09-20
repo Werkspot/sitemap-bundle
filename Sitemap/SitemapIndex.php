@@ -6,9 +6,7 @@ namespace Werkspot\Bundle\SitemapBundle\Sitemap;
 
 class SitemapIndex
 {
-    /**
-     * @var SitemapSection
-     */
+    /** @var SitemapSection[] $sections */
     private array $sections = [];
 
     public function addSection(SitemapSection $section): void

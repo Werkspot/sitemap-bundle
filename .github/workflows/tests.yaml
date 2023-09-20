@@ -1,0 +1,41 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '*'
+name: Tests
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: [8.1, 8.2]
+        symfony-version: ["^5.2", "^6.3"]
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer
+      - uses: actions/checkout@v4
+      - name: Require Symfony Framework bundle ${{ matrix.symfony-version }}
+        run: composer require symfony/framework-bundle:${{ matrix.symfony-version }}
+      - name: Install dependencies
+        run: composer install
+      - name: Run test
+        run: vendor/bin/phpunit --configuration phpunit.xml --coverage-text
+  cs-fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: composer install
+      - name: Run CS fixer
+        run: vendor/bin/php-cs-fixer fix --dry-run

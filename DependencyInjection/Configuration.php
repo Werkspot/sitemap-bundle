@@ -14,9 +14,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    /** {@inheritdoc} */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         return new TreeBuilder('werkspot_sitemap');

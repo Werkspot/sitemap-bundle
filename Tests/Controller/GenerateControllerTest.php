@@ -22,16 +22,14 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
  */
 final class GenerateControllerTest extends WebTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function index_action(): void
     {
         $client = self::createClient();
         $url = $client->getContainer()->get('router')->generate(
             'werkspot_sitemap_index',
             [],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
         $mockPageCount = 20;
@@ -62,9 +60,7 @@ final class GenerateControllerTest extends WebTestCase
         self::assertGreaterThan(0, $client->getResponse()->getTtl());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function section_action(): void
     {
         $mockPage = 20;
@@ -78,7 +74,7 @@ final class GenerateControllerTest extends WebTestCase
                 'section' => $mockSectionName,
                 'page' => $mockPage,
             ],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
         $mockUrls = [];
@@ -110,9 +106,7 @@ final class GenerateControllerTest extends WebTestCase
         self::assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function section_action_with_alternate_links(): void
     {
         $mockPage = 1;
@@ -126,7 +120,7 @@ final class GenerateControllerTest extends WebTestCase
                 'section' => $mockSectionName,
                 'page' => $mockPage,
             ],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
         $mockUrl = Mockery::mock(Url::class);
@@ -162,9 +156,7 @@ final class GenerateControllerTest extends WebTestCase
         self::assertGreaterThan(0, $client->getResponse()->getMaxAge());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function section_action_out_of_range(): void
     {
         $mockPage = 20;
@@ -177,7 +169,7 @@ final class GenerateControllerTest extends WebTestCase
                 'section' => $mockSectionName,
                 'page' => $mockPage,
             ],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
 
         $mockSectionPage = Mockery::mock(SitemapSectionPage::class);

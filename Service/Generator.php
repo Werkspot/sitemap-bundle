@@ -11,9 +11,7 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
 
 class Generator
 {
-    /**
-     * @var ProviderInterface[]
-     */
+    /** @var ProviderInterface[] */
     private array $providers = [];
 
     public function generateIndex(): SitemapIndex

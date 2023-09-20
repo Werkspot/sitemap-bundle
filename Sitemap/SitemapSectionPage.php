@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Werkspot\Bundle\SitemapBundle\Sitemap;
 
+use function count;
+
 class SitemapSectionPage
 {
     /**
@@ -13,9 +15,7 @@ class SitemapSectionPage
      */
     public const MAX_ITEMS_PER_PAGE = 10000;
 
-    /**
-     * @var Url[]
-     */
+    /** @var Url[] */
     private array $urls = [];
 
     public function addUrl(Url $url): void

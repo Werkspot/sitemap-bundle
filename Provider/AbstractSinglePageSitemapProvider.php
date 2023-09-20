@@ -22,9 +22,7 @@ abstract class AbstractSinglePageSitemapProvider extends AbstractSitemapProvider
 
     abstract public function getSinglePage(): SitemapSectionPage;
 
-    /**
-     * Returning number of results just enough to indicate one page
-     */
+    /** Returning number of results just enough to indicate one page */
     final public function getCount(): int
     {
         return 1;

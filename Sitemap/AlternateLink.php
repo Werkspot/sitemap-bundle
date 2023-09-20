@@ -14,8 +14,10 @@ class AlternateLink
 
     private string $hreflang;
 
-    public function __construct(string $href, string $hreflang)
-    {
+    public function __construct(
+        string $href,
+        string $hreflang,
+    ) {
         $this->href = $href;
         $this->hreflang = $hreflang;
     }

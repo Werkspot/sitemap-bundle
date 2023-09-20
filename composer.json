@@ -40,7 +40,7 @@
         "symfony/twig-bridge": "^4.4 || ^5.2",
         "symfony/twig-bundle": "^4.4 || ^5.2",
         "symfony/yaml": "^4.4 || ^5.2",
-        "friendsofphp/php-cs-fixer": "^v2.18"
+        "instapro/coding-standard": "^1.0"
     },
     "config": {
         "bin-dir": "vendor/bin"

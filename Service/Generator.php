@@ -49,6 +49,6 @@ class Generator
 
     private function getProvider(string $sectionName): ?ProviderInterface
     {
-        return isset($this->providers[$sectionName]) ? $this->providers[$sectionName] : null;
+        return $this->providers[$sectionName] ?? null;
     }
 }

@@ -16,16 +16,17 @@ final class GenerateController
 
     private Generator $sitemapGenerator;
 
-    public function __construct(int $cacheAge, Generator $sitemapGenerator, Environment $twig)
-    {
+    public function __construct(
+        int $cacheAge,
+        Generator $sitemapGenerator,
+        Environment $twig,
+    ) {
         $this->cacheAge = $cacheAge;
         $this->twig = $twig;
         $this->sitemapGenerator = $sitemapGenerator;
     }
 
-    /**
-     * Shows the sitemap index with links to deeper sitemap sections
-     */
+    /** Shows the sitemap index with links to deeper sitemap sections */
     public function indexAction(): Response
     {
         $index = $this->sitemapGenerator->generateIndex();
@@ -35,9 +36,7 @@ final class GenerateController
         ], $this->getEmptyXmlResponse());
     }
 
-    /**
-     * Renders a single sitemap section
-     */
+    /** Renders a single sitemap section */
     public function sectionAction(string $section, int $page): Response
     {
         $sitemapSectionPage = $this->sitemapGenerator->generateSectionPage($section, $page);

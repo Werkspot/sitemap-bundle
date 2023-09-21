@@ -6,6 +6,7 @@ namespace Werkspot\Bundle\SitemapBundle\Sitemap;
 
 use DateTime;
 use RuntimeException;
+use function in_array;
 
 class Url
 {
@@ -17,27 +18,25 @@ class Url
     public const CHANGEFREQ_YEARLY = 'yearly';
     public const CHANGEFREQ_NEVER = 'never';
 
-    /**
-     * Absolute url
-     */
+    /** Absolute url */
     protected string $loc;
 
     protected ?DateTime $lastmod;
 
     protected ?string $changefreq;
 
-    /**
-     * String in float format
-     */
+    /** String in float format */
     protected ?string $priority;
 
-    /**
-     * @var AlternateLink[]
-     */
+    /** @var AlternateLink[] */
     protected array $alternateLinks = [];
 
-    public function __construct(string $loc, ?string $changefreq = null, ?float $priority = null, ?DateTime $lastmod = null)
-    {
+    public function __construct(
+        string $loc,
+        ?string $changefreq = null,
+        ?float $priority = null,
+        ?DateTime $lastmod = null,
+    ) {
         $this->setLoc($loc);
         $this->setLastmod($lastmod);
         $this->setChangefreq($changefreq);
@@ -80,7 +79,7 @@ class Url
                 self::CHANGEFREQ_YEARLY,
                 self::CHANGEFREQ_NEVER,
                 null,
-            ]
+            ],
         )
         ) {
             throw new RuntimeException(sprintf('The value "%s" is not supported by the option changefreq. See http://www.sitemaps.org/protocol.html#xmlTagDefinitions', $changefreq));
@@ -113,9 +112,7 @@ class Url
         $this->alternateLinks[] = $alternateLink;
     }
 
-    /**
-     * @return AlternateLink[]
-     */
+    /** @return AlternateLink[] */
     public function getAlternateLinks(): array
     {
         return $this->alternateLinks;

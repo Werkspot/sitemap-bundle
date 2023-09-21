@@ -24,9 +24,7 @@ final class GeneratorTest extends TestCase
         $this->generator = new Generator();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function generate_index_with_empty_count(): void
     {
         $mockProvider = Mockery::mock(ProviderInterface::class);
@@ -40,9 +38,7 @@ final class GeneratorTest extends TestCase
         self::assertEmpty($index->getSections());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function generate_index(): void
     {
         $mockCount = 1234;

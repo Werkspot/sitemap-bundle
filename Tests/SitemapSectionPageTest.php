@@ -25,9 +25,7 @@ final class SitemapSectionPageTest extends TestCase
         $this->page = new SitemapSectionPage();
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function get_urls(): void
     {
         $mockUrl = Mockery::mock(Url::class);
@@ -36,9 +34,7 @@ final class SitemapSectionPageTest extends TestCase
         self::assertEquals([$mockUrl], $this->page->getUrls());
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function count_urls(): void
     {
         $mockUrl = Mockery::mock(Url::class);

@@ -7,6 +7,7 @@ namespace Werkspot\Bundle\SitemapBundle\Provider;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSection;
 use Werkspot\Bundle\SitemapBundle\Sitemap\SitemapSectionPage;
+use function array_slice;
 
 abstract class AbstractSitemapProvider implements ProviderInterface
 {
@@ -32,9 +33,7 @@ abstract class AbstractSitemapProvider implements ProviderInterface
         return $this->urlGenerator->generate($routeName, $options, UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    /**
-     * Just to get consistent paging even with smaller limits
-     */
+    /** Just to get consistent paging even with smaller limits */
     protected function getSimpleArrayPage(array $data, int $page): array
     {
         $limit = $this->getMaxItemsPerPage();

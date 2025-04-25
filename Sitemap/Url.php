@@ -7,6 +7,7 @@ namespace Werkspot\Bundle\SitemapBundle\Sitemap;
 use DateTime;
 use RuntimeException;
 use function in_array;
+use function sprintf;
 
 class Url
 {

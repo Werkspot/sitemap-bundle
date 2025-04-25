@@ -8,22 +8,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 use Werkspot\Bundle\SitemapBundle\Service\Generator;
 
-final class GenerateController
+final readonly class GenerateController
 {
-    private int $cacheAge;
-
-    private Environment $twig;
-
-    private Generator $sitemapGenerator;
-
     public function __construct(
-        int $cacheAge,
-        Generator $sitemapGenerator,
-        Environment $twig,
+        private int $cacheAge,
+        private Generator $sitemapGenerator,
+        private Environment $twig,
     ) {
-        $this->cacheAge = $cacheAge;
-        $this->twig = $twig;
-        $this->sitemapGenerator = $sitemapGenerator;
     }
 
     /** Shows the sitemap index with links to deeper sitemap sections */
@@ -57,7 +48,7 @@ final class GenerateController
         return $response;
     }
 
-    private function render(string $view, array $parameters = [], Response $response = null): Response
+    private function render(string $view, array $parameters = [], ?Response $response = null): Response
     {
         $content = $this->twig->render($view, $parameters);
 

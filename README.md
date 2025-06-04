@@ -23,7 +23,7 @@ The bundle generates a sitemap by looking for data providers.
 
 A provider is a class that implements [ProviderInterface](Provider/ProviderInterface.php) and is tagged as `werkspot.sitemap_provider` in the service container.
 
-The bundle's service will gather data from all providers and create a sitemap section for everyone of them.
+The bundle's service will gather data from all providers and create a sitemap section for every one of them.
 
 Each section can generate one or more pages.
 
@@ -42,18 +42,12 @@ use Werkspot\Bundle\SitemapBundle\Sitemap\Url;
 
 class StaticPageSitemapProvider extends AbstractSinglePageSitemapProvider
 {
-    /**
-     * @return string
-     */
-    public function getSectionName()
+    public function getSectionName(): string
     {
         return 'default';
     }
 
-    /**
-     * @return SitemapSectionPage
-     */
-    public function getSinglePage()
+    public function getSinglePage(): SitemapSectionPage
     {
         $page = new SitemapSectionPage();
 
@@ -94,26 +88,14 @@ use AppBundle\Domain\Entity\Product;
 
 class ProductSitemapProvider extends AbstractSitemapProvider
 {
-    /**
-     * @var ProductRepository
-     */
-    private $productRepository;
-
-    /**
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param ProductRepository $productRepository
-     */
-    public function __construct(UrlGeneratorInterface $urlGenerator, ProductRepository $productRepository)
-    {
+    public function __construct(
+        UrlGeneratorInterface $urlGenerator, 
+        private ProductRepository $productRepository,
+    ) {
         parent::__construct($urlGenerator);
-        $this->productRepository = $productRepository;
     }
 
-    /**
-     * @param int $pageNumber
-     * @return SitemapSectionPage
-     */
-    public function getPage($pageNumber)
+    public function getPage(int $pageNumber): SitemapSectionPage
     {
         $products = $this->productRepository->getProductsForSitemapPage(
             $pageNumber,
@@ -127,21 +109,16 @@ class ProductSitemapProvider extends AbstractSitemapProvider
             ]);
             $page->addUrl(new Url($urlRoute, Url::CHANGEFREQ_MONTHLY, 0.6));
         }
+
         return $page;
     }
 
-    /**
-     * @return string
-     */
-    public function getSectionName()
+    public function getSectionName(): string
     {
         return 'products';
     }
 
-    /**
-     * @return int
-     */
-    public function getCount()
+    public function getCount(): int
     {
         return $this->productRepository->getTotalCount();
     }
@@ -159,10 +136,7 @@ Google Guidelines: https://support.google.com/webmasters/answer/2620865?hl=en
 #### Example
 
 ```php
-    /**
-     * @return SitemapSectionPage
-     */
-    public function getSinglePage()
+    public function getSinglePage(): SitemapSectionPage
     {
         $page = new SitemapSectionPage();
 

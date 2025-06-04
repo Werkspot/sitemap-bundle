@@ -22,9 +22,11 @@ final readonly class GenerateController
     {
         $index = $this->sitemapGenerator->generateIndex();
 
-        return $this->render('@WerkspotSitemapBundle/index.xml.twig', [
-            'sitemap_index' => $index,
-        ], $this->getEmptyXmlResponse());
+        return $this->render(
+            '@WerkspotSitemapBundle/index.xml.twig',
+            ['sitemap_index' => $index],
+            $this->getEmptyXmlResponse(),
+        );
     }
 
     /** Renders a single sitemap section */
@@ -32,17 +34,23 @@ final readonly class GenerateController
     {
         $sitemapSectionPage = $this->sitemapGenerator->generateSectionPage($section, $page);
 
-        return $this->render('@WerkspotSitemapBundle/section.xml.twig', [
-            'sitemap_section' => $sitemapSectionPage,
-        ], $this->getEmptyXmlResponse());
+        return $this->render(
+            '@WerkspotSitemapBundle/section.xml.twig',
+            ['sitemap_section' => $sitemapSectionPage],
+            $this->getEmptyXmlResponse(),
+        );
     }
 
     private function getEmptyXmlResponse(): Response
     {
-        $response = new Response(null, Response::HTTP_OK, [
-            'Content-type' => 'text/xml',
-            'X-Robots-Tag' => 'noindex',
-        ]);
+        $response = new Response(
+            content: null,
+            status: Response::HTTP_OK,
+            headers: [
+                'Content-type' => 'text/xml',
+                'X-Robots-Tag' => 'noindex',
+            ],
+        );
         $response->setSharedMaxAge($this->cacheAge);
 
         return $response;

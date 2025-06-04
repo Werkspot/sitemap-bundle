@@ -57,7 +57,7 @@ class Url
         return $this->loc;
     }
 
-    protected function setLastmod(DateTime $lastmod = null): void
+    protected function setLastmod(?DateTime $lastmod = null): void
     {
         $this->lastmod = $lastmod;
     }
@@ -67,7 +67,7 @@ class Url
         return $this->lastmod;
     }
 
-    protected function setChangefreq(string $changefreq = null): void
+    protected function setChangefreq(?string $changefreq = null): void
     {
         if (!in_array(
             $changefreq,

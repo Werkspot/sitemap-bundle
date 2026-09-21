@@ -1,7 +1,7 @@
 # Werkspot sitemap bundle
 Bundle for generating dynamic sitemap.xml content with support for multiple sections and pages per section.
 
-[![Travis build status](https://travis-ci.org/Werkspot/sitemap-bundle.svg?branch=master)](https://travis-ci.org/Werkspot/sitemap-bundle)
+[![Tests](https://github.com/Werkspot/sitemap-bundle/actions/workflows/tests.yaml/badge.svg?branch=master)](https://github.com/Werkspot/sitemap-bundle/actions/workflows/tests.yaml)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Werkspot/sitemap-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Werkspot/sitemap-bundle/?branch=master)
 
 ### Install

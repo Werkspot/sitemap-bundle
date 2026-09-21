@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Werkspot\Bundle\SitemapBundle\WerkspotSitemapBundle;
 
 /**
  * Class AppKernel
@@ -13,9 +16,9 @@ class AppKernel extends Kernel
     public function registerBundles(): array
     {
         return [
-            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new Symfony\Bundle\TwigBundle\TwigBundle(),
-            new Werkspot\Bundle\SitemapBundle\WerkspotSitemapBundle(),
+            new FrameworkBundle(),
+            new TwigBundle(),
+            new WerkspotSitemapBundle(),
         ];
     }
 
